@@ -1,0 +1,14 @@
+SIFIDE v1.0 — DEFYCONT ASESORES
+=================================
+
+✅ Coloca tu proyecto React/Vite en esta carpeta.
+✅ Reemplaza `mi_icono.ico` por tu propio icono si lo deseas.
+✅ Haz doble clic en `todo_automatizado_final.bat`.
+✅ Sigue las instrucciones en pantalla.
+
+El script hará:
+— Instalar dependencias
+— Construir React
+— Lanzar Electron
+— Empaquetar .exe si quieres
+

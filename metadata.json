@@ -1,0 +1,6 @@
+{
+  "name": "Dashboard Fiscal Integral",
+  "description": "Una aplicación de dashboard para la gestión y visualización de datos fiscales, incluyendo ingresos, egresos, cálculo de IVA, ISR, RESICO PF y herramientas de análisis de XML.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

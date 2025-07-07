@@ -1,0 +1,83 @@
+	<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Fiscal Integral</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/index.css">
+
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .total-highlight td { background-color: #f1f5f9 !important; font-weight: 600; }
+    .chart-container { position: relative; height: 300px; width: 100%; }
+    .login-background { background-color: #1e293b; background-size: cover; background-position: center; }
+    html, body { height: 100%; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { display: flex; flex-direction: column; overscroll-behavior-y: none; }
+    #root { flex: 1; display: flex; flex-direction: column; }
+
+    .loading-container { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .loading-svg { width: 120px; height: 100px; stroke-width: 2; }
+    .loading-svg .dc-d, .loading-svg .dc-c {
+      stroke: url(#dc-gradient); fill: transparent;
+      stroke-dasharray: 500; stroke-dashoffset: 500;
+      animation: draw 2.5s ease-in-out forwards, glow 3s 1.5s infinite alternate;
+    }
+    .loading-svg .dc-c { animation-delay: 0.3s, 1.8s; }
+    .loading-svg .dc-text {
+      font-family: 'Arial', sans-serif; font-size: 40px; font-weight: bold; fill: url(#dc-gradient);
+      opacity: 0; animation: fadeInText 1s 2s forwards, glowText 3s 2s infinite alternate;
+    }
+
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 2px #67e8f9) drop-shadow(0 0 4px #67e8f9); stroke-opacity: 0.8; }
+      100% { filter: drop-shadow(0 0 5px #0ea5e9) drop-shadow(0 0 10px #0ea5e9); stroke-opacity: 1; }
+    }
+    @keyframes fadeInText { to { opacity: 1; } }
+    @keyframes glowText {
+      0% { filter: drop-shadow(0 0 1px #67e8f9) drop-shadow(0 0 2px #67e8f9); opacity: 0.9; }
+      100% { filter: drop-shadow(0 0 3px #0ea5e9) drop-shadow(0 0 5px #0ea5e9); opacity: 1; }
+    }
+    .loading-message {
+      margin-top: 1rem; font-size: 1.125rem; color: #334155; font-weight: 500; letter-spacing: 0.05em;
+      animation: pulseText 1.5s infinite alternate;
+    }
+    @keyframes pulseText { from { opacity: 0.7; } to { opacity: 1; } }
+  </style>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@^19.1.0",
+      "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+      "react/": "https://esm.sh/react@^19.1.0/",
+      "@google/genai": "https://esm.sh/@google/genai@^1.6.0"
+    }
+  }
+  </script>
+</head>
+
+<body class="h-full bg-slate-100 antialiased">
+  <div id="root"></div>
+
+  <!-- 🔷 CORRECTO para desarrollo -->
+  <script type="module" src="/src/index.tsx"></script>
+</body>
+</html>
