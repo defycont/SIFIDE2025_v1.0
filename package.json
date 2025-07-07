@@ -5,7 +5,7 @@
   "main": "electron-main.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node update-index-html.js",
+    "build": "vite build",
     "preview": "vite preview",
     "electron": "electron .",
     "dist": "electron-builder"
