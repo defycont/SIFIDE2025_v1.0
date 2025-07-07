@@ -2,28 +2,29 @@
 const fs = require('fs');
 const path = require('path');
 
-// Ruta al archivo index.html
 const htmlPath = path.join(__dirname, 'dist', 'index.html');
-// Carpeta donde Vite coloca los assets
 const assetsDir = path.join(__dirname, 'dist', 'assets');
 
-// Buscar el archivo JS principal generado por Vite
-const jsFile = fs.readdirSync(assetsDir).find(file => file.endsWith('.js') && file.includes('index'));
+// buscar cualquier archivo .js generado por Vite
+const jsFiles = fs.readdirSync(assetsDir).filter(file => file.endsWith('.js'));
 
-if (!jsFile) {
-  console.error('❌ No se encontró ningún archivo JS de Vite en dist/assets.');
+if (!jsFiles.length) {
+  console.error('❌ No se encontró ningún archivo JS en dist/assets.');
   process.exit(1);
 }
 
-// Leer el contenido actual del HTML
+// normalmente solo hay uno principal; tomamos el primero
+const mainJs = jsFiles[0];
+console.log(`✅ Archivo JS encontrado: ${mainJs}`);
+
+// leemos index.html
 let html = fs.readFileSync(htmlPath, 'utf8');
 
-// Reemplazar la línea del script
+// reemplazamos cualquier <script type="module" src="…"></script>
 html = html.replace(
   /<script type="module" src=".*"><\/script>/,
-  `<script type="module" src="/assets/${jsFile}"></script>`
+  `<script type="module" src="/assets/${mainJs}"></script>`
 );
 
-// Guardar el HTML actualizado
 fs.writeFileSync(htmlPath, html);
-console.log(`✅ index.html actualizado con: ${jsFile}`);
+console.log(`✅ index.html actualizado para usar: ${mainJs}`);
